@@ -98,7 +98,7 @@ class NumpyXOR:
 
             if i % print_rate == 0:
                 loss = np.mean(error_output**2)
-                print(f"Epoch {i:,}, Loss: {loss}")
+                print(f"Epoch {i:,} Loss: {loss}")
 
         print("\nPredictions:")
         print(final_output)
