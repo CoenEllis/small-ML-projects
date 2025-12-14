@@ -8,9 +8,7 @@ import numpy as np
 
 
 class NumpyXOR:
-    """
-    A class for training a NN to learn XOR.
-    """
+    """A class for training a NN to learn XOR."""
     def __init__(self):
         """
         Initialize the input, and output matrices
