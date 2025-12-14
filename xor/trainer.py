@@ -43,7 +43,7 @@ class XORTrainer:
         if checkpoint_path is not None:
             self.model.load_state_dict(torch.load(checkpoint_path))
             print(f"Model loaded from: {checkpoint_path}")
-        self.criterion = nn.MSELoss()
+        self.criterion = nn.BCELoss()
         self.optimizer = optim.Adam(self.model.parameters(),
                                     lr=learning_rate)
 
