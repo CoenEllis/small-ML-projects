@@ -1,7 +1,7 @@
 """
 Plant Classifier Module
 
-This module trains a neural network to classify plants based on
+This module uses logistic regression to classify plants based on
 their stem height and leaf radius into 3 groups.
 """
 
@@ -33,7 +33,7 @@ class PlantClassifier:
 
     def train(self, epochs=1000, print_rate=100):
         """
-        Train the neural network.
+        Train the model.
 
         Args:
             epochs (int): Amount of training iterations. Default is 1000.

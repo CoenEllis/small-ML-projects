@@ -1,7 +1,7 @@
 """
 Plant Age Identifier Module
 
-This module trains a neural network to identify the age of a plant given the
+This module uses linear regression to identify the age of a plant given the
 stem size and leaf radius.
 """
 
@@ -36,7 +36,7 @@ class PlantAgeIdentifier:
 
     def train(self, epochs=1000, print_rate=100):
         """
-        Train the neural network.
+        Train the model.
 
         Args:
             epochs (int): Amount of training iterations. Default is 1000.
