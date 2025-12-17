@@ -70,7 +70,7 @@ class PlantClassifier:
         Returns:
             int: The group of plant.
         """
-        new_plant = torch.tensor([[stem_height, leaf_radius]])
+        new_plant = torch.tensor([[stem_height, leaf_radius]]).to(self.device)
         with torch.no_grad():
             logits = self.model(new_plant)
             prediction = torch.argmax(logits, dim=1)

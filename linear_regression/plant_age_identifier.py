@@ -73,7 +73,7 @@ class PlantAgeIdentifier:
         Returns:
             float: The predicted age of the plant.
         """
-        new_plant = torch.tensor([[stem_height, leaf_radius]])
+        new_plant = torch.tensor([[stem_height, leaf_radius]]).to(self.device)
         with torch.no_grad():
             prediction = self.model(new_plant)
         return prediction.item()
