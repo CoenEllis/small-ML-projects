@@ -14,6 +14,8 @@ class PlantAgeIdentifier:
     """A class for identifying the age of a plant."""
     def __init__(self, learning_rate=0.01):
         """Initialize tensors, model, criterion, optimizer."""
+        self.device = torch.device(
+            "cuda" if torch.cuda.is_available() else "cpu")
         # Input data: first value is stem height, second is leaf radius
         self.X = torch.tensor([[1.0, 0.3],
                                [1.5, 0.8],

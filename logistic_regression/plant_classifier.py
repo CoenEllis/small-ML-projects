@@ -19,12 +19,14 @@ class PlantClassifier:
         # Plant C: 1-2, 0-2
         self.device = torch.device(
             "cuda" if torch.cuda.is_available() else "cpu")
+        # First value is stem height, second value is leaf radius
         self.X = torch.tensor([[2.2, 1.4],
                                [4.9, 2.8],
                                [5.7, 3.2],
                                [4.5, 3.2],
                                [0.2, 0.8],
                                [1.3, 1.4]]).to(self.device)
+        # Each corresponding value is the class it belongs to
         self.y = torch.tensor([0, 0, 1, 1, 2, 2]).to(self.device)
         self.model = nn.Linear(2, 3).to(self.device)
 
