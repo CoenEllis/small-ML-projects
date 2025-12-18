@@ -41,6 +41,7 @@ class PlantClassifier:
             epochs (int): Amount of training iterations. Default is 1000.
             print_rate (int): Epochs before printing status. Default is 100.
         """
+        self.model.train()
         for epoch in range(epochs):
             logits = self.model(self.X)
             loss = self.criterion(logits, self.y)

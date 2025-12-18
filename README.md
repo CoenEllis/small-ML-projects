@@ -12,6 +12,8 @@ workflows and frameworks.
 - **XOR** - PyTorch neural network that learns the XOR logic function
 - **Linear Regression** - PyTorch linear regression model that identifies age of plant
 - **Logistic Regression** - PyTorch logistic regression model that classifies a plant based on characteristics
+- **MLP Classifier** - PyTorch MLP that trains on the same data as the logistic regression model but with a hidden layer.
+- **Evaluation Metrics** - A program to train a model and display accuract and a confusion matrix to understand error.
 
 ## Purpose
 These projects show understanding of how machine learning models work, and also projects demonstrating them.
