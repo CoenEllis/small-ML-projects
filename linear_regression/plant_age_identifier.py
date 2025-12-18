@@ -44,6 +44,7 @@ class PlantAgeIdentifier:
             epochs (int): Amount of training iterations. Default is 1000.
             print_rate (int): Epochs before printing status. Default is 100.
         """
+        self.model.train()
         for epoch in range(epochs):
             # Forward pass
             y_pred = self.model(self.X)
