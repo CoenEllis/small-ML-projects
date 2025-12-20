@@ -13,7 +13,7 @@ import torch.optim as optim
 class EvaluationMetrics():
     """A class to train the model and evaluate metrics."""
     def __init__(self):
-        """Initialize tensors, model, criterion, optimizer, and data."""
+        """Initialize tensors, model, criterion, and optimizer."""
         self.X = torch.tensor([
             [1.0, 2.0],
             [1.5, 1.8],
