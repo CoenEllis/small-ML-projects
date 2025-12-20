@@ -14,6 +14,7 @@ workflows and frameworks.
 - **Logistic Regression** - PyTorch logistic regression model that classifies a plant based on characteristics
 - **MLP Classifier** - PyTorch MLP that trains on the same data as the logistic regression model but with a hidden layer.
 - **Evaluation Metrics** - A program to train a model and display accuract and a confusion matrix to understand error.
+- **Train Validation Split** - Test a model's accuracy by splitting training data and testing on the unseen data.
 
 ## Purpose
 These projects show understanding of how machine learning models work, and also projects demonstrating them.
