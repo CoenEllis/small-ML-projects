@@ -107,4 +107,5 @@ class MNISTTrainer:
 if __name__ == "__main__":
     # Script to train the model
     trainer = MNISTTrainer(batch_size=64, learning_rate=0.001)
+    print(f"Using device: {trainer.device}")
     trainer.train(10)
