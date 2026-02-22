@@ -12,6 +12,7 @@ from model import MNISTModel
 
 class MNISTEvaluator:
     """A class to evaluate the model."""
+
     def __init__(self, checkpoint_path, batch_size=64):
         """
         Initialize data and components to evaluate the neural network.
@@ -21,33 +22,30 @@ class MNISTEvaluator:
             batch_size (int): The number of batches processed at once.
                 Default is 64.
         """
-        self.device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         # Load model
         self.model = MNISTModel().to(self.device)
         self.model.load_state_dict(
-            torch.load(checkpoint_path, map_location=self.device))
+            torch.load(checkpoint_path, map_location=self.device)
+        )
         self.model.eval()
         print(f"Model loaded from: {checkpoint_path}")
 
         # Load test dataset
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,)),
-        ])
+        transform = transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize((0.1307,), (0.3081,)),
+            ]
+        )
 
         self.test_dataset = datasets.MNIST(
-            root='./data',
-            train=False,
-            download=True,
-            transform=transform
+            root="./data", train=False, download=True, transform=transform
         )
 
         self.test_loader = DataLoader(
-            self.test_dataset,
-            batch_size=batch_size,
-            shuffle=False
+            self.test_dataset, batch_size=batch_size, shuffle=False
         )
 
     def evaluate(self):

@@ -10,6 +10,7 @@ import torch.nn as nn
 
 class MNISTModel(nn.Module):
     """A neural network for classifying digits."""
+
     def __init__(self):
         """Initialize the MNISTModel with three layers and an activation."""
         super().__init__()

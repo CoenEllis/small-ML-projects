@@ -10,6 +10,7 @@ import torch.nn as nn
 
 class XORModel(nn.Module):
     """A simple feedforward neural network for learning XOR logic."""
+
     def __init__(self, hidden_size=4):
         """
         Initialize the XORModel with two layers and an activation.

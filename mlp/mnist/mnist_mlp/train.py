@@ -3,6 +3,7 @@ MLP MNIST Train Module
 
 This module trains the MNIST model.
 """
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -14,8 +15,8 @@ from model import MNISTModel
 
 class MNISTTrainer:
     """Trains the MNIST model."""
-    def __init__(self, batch_size=64, learning_rate=0.001,
-                 checkpoint_path=None):
+
+    def __init__(self, batch_size=64, learning_rate=0.001, checkpoint_path=None):
         """
         Initialize the MNISTTrainer with data to load and train MNIST.
 
@@ -27,41 +28,32 @@ class MNISTTrainer:
             checkpoint_path (str or None): The path to load an existing
                 model. Default is None.
         """
-        self.device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # Transform to flatten 28x28 images to 784-dimensional vectors
-        transform = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,)),
-            transforms.Lambda(lambda x: torch.flatten(x))
-        ])
+        transform = transforms.Compose(
+            [
+                transforms.ToTensor(),
+                transforms.Normalize((0.1307,), (0.3081,)),
+                transforms.Lambda(lambda x: torch.flatten(x)),
+            ]
+        )
 
         # Load MNIST dataset
         self.train_dataset = datasets.MNIST(
-            root='./data',
-            train=True,
-            download=True,
-            transform=transform
+            root="./data", train=True, download=True, transform=transform
         )
 
         self.test_dataset = datasets.MNIST(
-            root='./data',
-            train=False,
-            download=True,
-            transform=transform
+            root="./data", train=False, download=True, transform=transform
         )
 
         # Create data loaders
         self.train_loader = DataLoader(
-            self.train_dataset,
-            batch_size=batch_size,
-            shuffle=True
+            self.train_dataset, batch_size=batch_size, shuffle=True
         )
 
         self.test_loader = DataLoader(
-            self.test_dataset,
-            batch_size=batch_size,
-            shuffle=False
+            self.test_dataset, batch_size=batch_size, shuffle=False
         )
 
         self.model = MNISTModel().to(self.device)
@@ -69,8 +61,7 @@ class MNISTTrainer:
             self.model.load_state_dict(torch.load(checkpoint_path))
             print(f"Model loaded from: {checkpoint_path}")
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.Adam(
-            self.model.parameters(), lr=learning_rate)
+        self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
 
     def train(self, epochs, print_rate=100, save_path=None):
         """
@@ -97,8 +88,10 @@ class MNISTTrainer:
                 total_loss += loss.item()
 
                 if batch_idx % print_rate == 0:
-                    print(f'Epoch {epoch+1}/{epochs}, '
-                          f'Batch {batch_idx}: Loss: {loss.item():.4f}')
+                    print(
+                        f"Epoch {epoch+1}/{epochs}, "
+                        f"Batch {batch_idx}: Loss: {loss.item():.4f}"
+                    )
 
             if save_path is not None:
                 torch.save(self.model.state_dict(), save_path)

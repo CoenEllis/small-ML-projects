@@ -10,6 +10,7 @@ import torch.nn as nn
 
 class ClassifierModel(nn.Module):
     """A neural network for classifying plants."""
+
     def __init__(self, hidden_size=4):
         """
         Initialize the ClassifierModel with two layers and an activation.

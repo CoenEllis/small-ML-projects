@@ -5,6 +5,7 @@ This module trains and evaluates the classifier neural network,
 including data preparation, model training, checkpointing,
 and displaying predictions.
 """
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -14,8 +15,8 @@ from model import ClassifierModel
 
 class ClassifierTrainer:
     """Trains and evaluates a neural network to classify plants."""
-    def __init__(self, hidden_size=4, learning_rate=0.001,
-                 checkpoint_path=None):
+
+    def __init__(self, hidden_size=4, learning_rate=0.001, checkpoint_path=None):
         """
         Initialize the ClassifierTrainer with model, data,
         and training components.
@@ -28,14 +29,10 @@ class ClassifierTrainer:
             checkpoint_path (str, optional): Path to load a saved model
                 checkpoint. Default is None.
         """
-        self.device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu")
-        self.X = torch.tensor([[2.2, 1.4],
-                               [4.9, 2.8],
-                               [5.7, 3.2],
-                               [4.5, 3.2],
-                               [0.2, 0.8],
-                               [1.3, 1.4]]).to(self.device)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.X = torch.tensor(
+            [[2.2, 1.4], [4.9, 2.8], [5.7, 3.2], [4.5, 3.2], [0.2, 0.8], [1.3, 1.4]]
+        ).to(self.device)
         # Each corresponding value is the class it belongs to
         self.y = torch.tensor([0, 0, 1, 1, 2, 2]).to(self.device)
         self.model = ClassifierModel(hidden_size).to(self.device)
@@ -43,11 +40,9 @@ class ClassifierTrainer:
             self.model.load_state_dict(torch.load(checkpoint_path))
             print(f"Model loaded from: {checkpoint_path}")
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.Adam(self.model.parameters(),
-                                    lr=learning_rate)
+        self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
 
-    def train(self, epochs, print_rate=1000, save_rate=10000,
-              save_path=None):
+    def train(self, epochs, print_rate=1000, save_rate=10000, save_path=None):
         """
         Train the model on plant classes with periodic progress updates
         and checkpointing.
@@ -69,10 +64,10 @@ class ClassifierTrainer:
             loss.backward()
             self.optimizer.step()
             if epoch % print_rate == 0:
-                print(f'Epoch: {epoch}: Loss: {loss.item():.4f}')
+                print(f"Epoch: {epoch}: Loss: {loss.item():.4f}")
             if save_path is not None:
                 if epoch % save_rate == 0:
-                    print(f'Saved model. Epoch {epoch}')
+                    print(f"Saved model. Epoch {epoch}")
                     torch.save(self.model.state_dict(), save_path)
 
         print("\nPredictions:")

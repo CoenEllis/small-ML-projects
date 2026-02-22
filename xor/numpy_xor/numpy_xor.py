@@ -9,15 +9,13 @@ import numpy as np
 
 class NumpyXOR:
     """A class for training a NN to learn XOR."""
+
     def __init__(self):
         """
         Initialize the input, and output matrices
         as well as the weights, biases, and learning rate.
         """
-        self.X = np.array([[0, 0],  # Input layer
-                           [0, 1],
-                           [1, 0],
-                           [1, 1]])
+        self.X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])  # Input layer
 
         self.y = np.array([[0], [1], [1], [0]])
 
@@ -67,32 +65,24 @@ class NumpyXOR:
         """
         for i in range(epochs):
             # Forward pass for the hidden and final outputs
-            hidden_output = self.sigmoid(
-                np.dot(self.X, self.W1) + self.b1)
-            final_output = self.sigmoid(
-                np.dot(hidden_output, self.W2) + self.b2)
+            hidden_output = self.sigmoid(np.dot(self.X, self.W1) + self.b1)
+            final_output = self.sigmoid(np.dot(hidden_output, self.W2) + self.b2)
 
             # Backpropagation
             # Calculate output layer error and gradient
             error_output = self.y - final_output
-            delta_output = (error_output *
-                            self.sigmoid_derivative(final_output))
+            delta_output = error_output * self.sigmoid_derivative(final_output)
 
             # Calculate hidden layer error and gradient
             error_hidden = delta_output.dot(self.W2.T)
-            delta_hidden = (error_hidden *
-                            self.sigmoid_derivative(hidden_output))
+            delta_hidden = error_hidden * self.sigmoid_derivative(hidden_output)
 
             # Update weights and biases using gradients
-            self.W2 += (hidden_output.T.dot(delta_output) *
-                        self.learning_rate)
-            self.b2 += (np.sum(delta_output, axis=0, keepdims=True) *
-                        self.learning_rate)
+            self.W2 += hidden_output.T.dot(delta_output) * self.learning_rate
+            self.b2 += np.sum(delta_output, axis=0, keepdims=True) * self.learning_rate
 
-            self.W1 += (self.X.T.dot(delta_hidden) *
-                        self.learning_rate)
-            self.b1 += (np.sum(delta_hidden, axis=0, keepdims=True) *
-                        self.learning_rate)
+            self.W1 += self.X.T.dot(delta_hidden) * self.learning_rate
+            self.b1 += np.sum(delta_hidden, axis=0, keepdims=True) * self.learning_rate
 
             if i % print_rate == 0:
                 loss = np.mean(error_output**2)

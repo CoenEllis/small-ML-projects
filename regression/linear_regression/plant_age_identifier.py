@@ -12,23 +12,28 @@ import torch.optim as optim
 
 class PlantAgeIdentifier:
     """A class for identifying the age of a plant."""
+
     def __init__(self, learning_rate=0.01):
         """Initialize tensors, model, criterion, optimizer."""
-        self.device = torch.device(
-            "cuda" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         # Input data: first value is stem height, second is leaf radius
-        self.X = torch.tensor([[1.0, 0.3],
-                               [1.5, 0.8],
-                               [2.2, 1.1],
-                               [2.9, 1.9],
-                               [3.8, 2.2],
-                               [4.3, 2.3],
-                               [4.5, 2.5],
-                               [4.6, 2.7]]).to(self.device)
+        self.X = torch.tensor(
+            [
+                [1.0, 0.3],
+                [1.5, 0.8],
+                [2.2, 1.1],
+                [2.9, 1.9],
+                [3.8, 2.2],
+                [4.3, 2.3],
+                [4.5, 2.5],
+                [4.6, 2.7],
+            ]
+        ).to(self.device)
 
         # Output data, each value is the corresponding age
-        self.y = torch.tensor([[1.5], [2.0], [2.5], [3.0],
-                               [3.5], [4.5], [5.0], [5.5]]).to(self.device)
+        self.y = torch.tensor(
+            [[1.5], [2.0], [2.5], [3.0], [3.5], [4.5], [5.0], [5.5]]
+        ).to(self.device)
 
         # Linear regression model: 2 inputs -> 1 output (age)
         self.model = nn.Linear(2, 1).to(self.device)
@@ -56,7 +61,7 @@ class PlantAgeIdentifier:
             self.optimizer.step()
             if epoch % print_rate == 0:
                 print(f"Epoch: {epoch}, Loss: {loss.item()}")
-        
+
         print("\nPredictions:")
         self.model.eval()
         with torch.no_grad():

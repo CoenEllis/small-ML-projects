@@ -10,24 +10,16 @@ import torch.nn as nn
 import torch.optim as optim
 
 
-class EvaluationMetrics():
+class EvaluationMetrics:
     """A class to train the model and evaluate metrics."""
+
     def __init__(self):
         """Initialize tensors, model, criterion, and optimizer."""
-        self.X = torch.tensor([
-            [1.0, 2.0],
-            [1.5, 1.8],
-            [3.0, 3.5],
-            [3.2, 4.0]
-        ])
+        self.X = torch.tensor([[1.0, 2.0], [1.5, 1.8], [3.0, 3.5], [3.2, 4.0]])
 
         self.y = torch.tensor([0, 0, 1, 1])
 
-        self.model = nn.Sequential(
-            nn.Linear(2, 8),
-            nn.ReLU(),
-            nn.Linear(8, 2)
-        )
+        self.model = nn.Sequential(nn.Linear(2, 8), nn.ReLU(), nn.Linear(8, 2))
 
         self.criterion = nn.CrossEntropyLoss()
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.01)
